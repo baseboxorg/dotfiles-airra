@@ -36,6 +36,8 @@ create_symlinks() {
         "vim/vim"
         "vim/vimrc"
 
+        "atom/$(get_os)/atom"
+
     )
 
     local i=""
