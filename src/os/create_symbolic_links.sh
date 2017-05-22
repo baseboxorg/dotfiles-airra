@@ -21,6 +21,12 @@ create_symlinks() {
         "shell/curlrc"
         "shell/inputrc"
 
+        "zshell/zsh_exports"
+        "zshell/zsh_functions"
+        "zshell/zsh_aliases"
+        "zshell/zsh_extra"
+        "zshell/zshrc"
+
         "git/gitattributes"
         "git/gitconfig"
         "git/gitignore"
