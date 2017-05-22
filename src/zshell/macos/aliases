@@ -1,0 +1,208 @@
+alias o="open"
+alias oo="open ."
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update'
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+# OS X has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# OS X has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | pbcopy"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+# Disable Spotlight
+alias spotoff="sudo mdutil -a -i off"
+# Enable Spotlight
+alias spoton="sudo mdutil -a -i on"
+
+# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
+alias plistbuddy="/usr/libexec/PlistBuddy"
+alias mute="osascript -e 'set volume 0'"
+alias loud="osascript -e 'set volume 7'"
+
+# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 7'"
+alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
+
+
+alias a=atom
+
+alias gl='git pull --prune'
+alias glg="git log --graph --decorate --oneline --abbrev-commit"
+alias glga="glg --all"
+alias gp='git push origin HEAD'
+alias gpa='git push origin --all'
+alias gd='git diff'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gco='git checkout'
+alias gb='git branch'
+alias ga='git add'
+alias gaa='git add -A'
+alias gcm='git commit -m'
+alias gcam='git commit -a -m'
+alias gs='git status -sb'
+alias gcl='git clone'
+alias gcb='git-copy-branch-name'
+alias gpr='gp && git pr'
+alias g='git'
+
+alias gotest='go test -covermode=count -coverprofile=coverage.out'
+alias gocover='gotest && go tool cover -html=coverage.out'
+
+
+alias npis='npm install --save'
+alias npisd='npm install --save-dev'
+alias npig='npm install -g'
+alias npit='npm init'
+alias npi='npm install'
+
+# ------------------------------------
+# Docker alias and function
+# ------------------------------------
+
+alias d='docker $*'
+alias dc='docker-compose $*'
+alias dm='docker-machine $*'
+
+
+# Get latest container ID
+alias dl="docker ps -l -q"
+
+# Get container process
+alias dps="docker ps"
+
+# Get process included stop container
+alias dpa="docker ps -a"
+
+# Get images
+alias di="docker images"
+
+# Get container IP
+alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+
+# Run deamonized container, e.g., $dkd base /bin/echo hello
+alias dkd="docker run -d -P"
+
+# Run interactive container, e.g., $dki base /bin/bash
+alias dki="docker run -i -t -P"
+
+# Execute interactive container, e.g., $dex base /bin/bash
+alias dex="docker exec -i -t"
+
+# Stop all containers
+dstop() { docker stop $(docker ps -a -q); }
+
+# Remove all containers
+drm() { docker rm $(docker ps -a -q); }
+
+# Stop and Remove all containers
+alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
+# Remove all images
+dri() { docker rmi $(docker images -q); }
+
+# Dockerfile build, e.g., $dbu tcnksm/test
+dbu() { docker build -t=$1 .; }
+
+# Show all alias related docker
+dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+
+# Convert docker-machine commands to aliases directly
+alias dmactive="docker-machine active"
+alias dmcreate="docker-machine create"
+alias dmconfig="docker-machine config"
+alias dminspect="docker-machine inspect"
+alias dmip="docker-machine ip"
+alias dmkill="docker-machine kill"
+alias dmls="docker-machine ls"
+alias dmregenerate-certs="docker-machine regenerate-certs"
+alias dmrestart="docker-machine restart"
+alias dmrm="docker-machine rm"
+alias dmenv="docker-machine env"
+alias dmssh="docker-machine ssh"
+alias dmstart="docker-machine start"
+alias dmstop="docker-machine stop"
+alias dmupgrade="docker-machine upgrade"
+alias dmurl="docker-machine url"
+alias dmhelp="docker-machine help"
+
+# customized aliases
+
+# list all docker processes included stop containers.
+alias dpa="docker ps -a"
+
+# list all untagged images (dangling)
+alias dangline="docker images -f "dangling=true" -q"
+
+# get dockerfile from image
+
+# Usages: dfimage <image> [-f], example: dfimage nginx
+alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock --rm centurylink/dockerfile-from-image"
+
+# list images and merge with tags
+alias dit="docker images |awk 'NR==1{l=length(\$0)}{printf \"%-20s %-20s %-20s\t%s:%s\n\",substr(\$0,l-51,20),substr(\$0,l-31,20),substr(\$0,l-11),\$1,\$2}'"
+
+# run jq via container. So you can run all commands in http://stedolan.github.io/jq/tutorial/ as normal, just replace jq with djq
+
+# example: curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' |djq '.[0] | {message: .commit.message, name: .commit.committer.name}'
+alias djq='docker run --rm ryfow/jq'
+
+# list the last container id
+alias dl='docker ps -l -q'
+
+# Vagrant
+alias v='vagrant $*'
+alias vd='vagrant destroy --force'
+alias vgs='vagrant global-status'
+alias vgsp='vagrant global-status --prune'
+alias vh='vagrant halt'
+alias vssh='vagrant ssh'
+alias vsshc='vagrant ssh-config'
+alias vu='vagrant up'
+alias vbox='vagrant box'
+alias vsus='vagrant suspend'
+alias vres='vagrant resume'
+alias vstat='vagrant status'
+alias vsnap='vagrant snapshot'
+alias vrel='vagrant reload'
+alias vp='vagrant provision'
+
+#########################################################################
+# Temporary paths useful for demos, other current projects
+#########################################################################
+alias tmp='~/Documents/Temp'
+alias cod='~/Dev/Code'
+alias dld='~/Downloads'
+alias doc='~/Documents'
+alias dev='~/Dev'

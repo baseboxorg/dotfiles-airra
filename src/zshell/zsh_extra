@@ -1,0 +1,5 @@
+if [[ $(uname -s) == "Darwin" ]]; then
+    source $DOTFILES/zshell/macos/extra
+elif [[ $(uname -s) == "Linux" ]]; then
+    source $DOTFILES/zshell/ubuntu/extra
+fi
