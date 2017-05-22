@@ -150,7 +150,7 @@ alias gpsum='g psum'
 alias gpsug='g psug'
 
 if [[ $(uname -s) == "Darwin" ]]; then
-    source $DOTFILES/zshell/macos/aliases
+    source $DOTFILES/src/zshell/macos/aliases
 elif [[ $(uname -s) == "Linux" ]]; then
-    source $DOTFILES/zshell/ubuntu/aliases
+    source $DOTFILES/src/zshell/ubuntu/aliases
 fi

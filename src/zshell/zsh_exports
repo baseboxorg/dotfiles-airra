@@ -42,7 +42,7 @@ export MANPAGER="less -X"
 export GREP_OPTIONS="--color=auto"
 
 if [[ $(uname -s) == "Darwin" ]]; then
-    source $DOTFILES/zshell/macos/exports
+    source $DOTFILES/src/zshell/macos/exports
 elif [[ $(uname -s) == "Linux" ]]; then
-    source $DOTFILES/zshell/ubuntu/exports
+    source $DOTFILES/src/zshell/ubuntu/exports
 fi

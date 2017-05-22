@@ -209,7 +209,7 @@ function image() {
 }
 
 if [[ $(uname -s) == "Darwin" ]]; then
-    source $DOTFILES/zshell/macos/functions
+    source $DOTFILES/src/zshell/macos/functions
 elif [[ $(uname -s) == "Linux" ]]; then
-    source $DOTFILES/zshell/ubuntu/functions
+    source $DOTFILES/src/zshell/ubuntu/functions
 fi
