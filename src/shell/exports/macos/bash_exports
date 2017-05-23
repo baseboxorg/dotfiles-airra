@@ -1,6 +1,10 @@
 #!/bin/bash
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# your project folder that we can `c [tab]` to
+export PROJECTS="$HOME/Dev"
+
+# your default editor
+export EDITOR='atom'
 # install rbenv
 export PATH="$PATH:$HOME/.rbenv"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -10,5 +14,6 @@ export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
 
 # GOPATH
+
 export GOPATH="$PROJECTS/Go"
 export PATH="$PATH:$GOPATH/bin"
