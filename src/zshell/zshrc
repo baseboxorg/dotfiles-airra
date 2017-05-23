@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # shortcut to this dotfiles path is $DOTFILES
-export DOTFILES="$HOME/Dev/dotfiles"
+export DOTFILES="$HOME/dev/dotfiles"
 
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10

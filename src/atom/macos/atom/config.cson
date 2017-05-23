@@ -26,8 +26,8 @@
     projectHome: "/Users/voosierra/Dev/Code"
     telemetryConsent: "no"
     themes: [
-      "atom-material-ui"
-      "atom-material-syntax"
+      "nucleus-dark-ui"
+      "one-dark-syntax"
     ]
     titleBar: "custom"
   editor:
@@ -39,6 +39,6 @@
   "tree-view":
     hideVcsIgnoredFiles: true
   wakatime:
-    apikey: "Enter your api key..."
+    apikey: "Saved in your ~/.wakatime.cfg file"
   welcome:
     showOnStartup: false
