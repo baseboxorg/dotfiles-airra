@@ -36,6 +36,8 @@
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
+  "linter-ui-default":
+    showPanel: true
   "tree-view":
     hideVcsIgnoredFiles: true
   wakatime:
